@@ -6,11 +6,11 @@
 #
 Name     : libXfont2
 Version  : 2.0.4
-Release  : 8
+Release  : 9
 URL      : https://www.x.org/releases/individual/lib/libXfont2-2.0.4.tar.bz2
 Source0  : https://www.x.org/releases/individual/lib/libXfont2-2.0.4.tar.bz2
-Source1 : https://www.x.org/releases/individual/lib/libXfont2-2.0.4.tar.bz2.sig
-Summary  : X11 font rasterisation library
+Source1  : https://www.x.org/releases/individual/lib/libXfont2-2.0.4.tar.bz2.sig
+Summary  : X font Library version 2
 Group    : Development/Tools
 License  : ICU
 Requires: libXfont2-lib = %{version}-%{release}
@@ -32,7 +32,6 @@ Summary: dev components for the libXfont2 package.
 Group: Development
 Requires: libXfont2-lib = %{version}-%{release}
 Provides: libXfont2-devel = %{version}-%{release}
-Requires: libXfont2 = %{version}-%{release}
 Requires: libXfont2 = %{version}-%{release}
 
 %description dev
@@ -58,21 +57,21 @@ license components for the libXfont2 package.
 
 %prep
 %setup -q -n libXfont2-2.0.4
+cd %{_builddir}/libXfont2-2.0.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570999981
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1604898955
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -82,10 +81,10 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1570999981
+export SOURCE_DATE_EPOCH=1604898955
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libXfont2
 cp %{_builddir}/libXfont2-2.0.4/COPYING %{buildroot}/usr/share/package-licenses/libXfont2/2b61cd7d9b22e98804387e896a3cfa382c1bc4ef
