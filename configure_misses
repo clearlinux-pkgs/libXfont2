@@ -1,3 +1,3 @@
-Configure miss: X.Org SGML entities >= 1.7
-Configure miss: library containing strlcat
+Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: if Xtrans should support os-specific local connections
+Configure miss: library containing strlcat

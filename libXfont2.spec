@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xCFDF148828C642A7 (alanc@freedesktop.org)
 #
 Name     : libXfont2
-Version  : 2.0.4
-Release  : 9
-URL      : https://www.x.org/releases/individual/lib/libXfont2-2.0.4.tar.bz2
-Source0  : https://www.x.org/releases/individual/lib/libXfont2-2.0.4.tar.bz2
-Source1  : https://www.x.org/releases/individual/lib/libXfont2-2.0.4.tar.bz2.sig
+Version  : 2.0.5
+Release  : 10
+URL      : https://www.x.org/releases/individual/lib/libXfont2-2.0.5.tar.bz2
+Source0  : https://www.x.org/releases/individual/lib/libXfont2-2.0.5.tar.bz2
+Source1  : https://www.x.org/releases/individual/lib/libXfont2-2.0.5.tar.bz2.sig
 Summary  : X font Library version 2
 Group    : Development/Tools
 License  : ICU
@@ -56,23 +56,23 @@ license components for the libXfont2 package.
 
 
 %prep
-%setup -q -n libXfont2-2.0.4
-cd %{_builddir}/libXfont2-2.0.4
+%setup -q -n libXfont2-2.0.5
+cd %{_builddir}/libXfont2-2.0.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604898955
+export SOURCE_DATE_EPOCH=1627928679
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -84,10 +84,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1604898955
+export SOURCE_DATE_EPOCH=1627928679
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libXfont2
-cp %{_builddir}/libXfont2-2.0.4/COPYING %{buildroot}/usr/share/package-licenses/libXfont2/2b61cd7d9b22e98804387e896a3cfa382c1bc4ef
+cp %{_builddir}/libXfont2-2.0.5/COPYING %{buildroot}/usr/share/package-licenses/libXfont2/2b61cd7d9b22e98804387e896a3cfa382c1bc4ef
 %make_install
 
 %files
