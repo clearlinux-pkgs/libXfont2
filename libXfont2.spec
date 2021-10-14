@@ -6,13 +6,14 @@
 #
 Name     : libXfont2
 Version  : 2.0.5
-Release  : 10
+Release  : 11
 URL      : https://www.x.org/releases/individual/lib/libXfont2-2.0.5.tar.bz2
 Source0  : https://www.x.org/releases/individual/lib/libXfont2-2.0.5.tar.bz2
 Source1  : https://www.x.org/releases/individual/lib/libXfont2-2.0.5.tar.bz2.sig
 Summary  : X font Library version 2
 Group    : Development/Tools
 License  : ICU
+Requires: libXfont2-filemap = %{version}-%{release}
 Requires: libXfont2-lib = %{version}-%{release}
 Requires: libXfont2-license = %{version}-%{release}
 BuildRequires : pkgconfig(fontenc)
@@ -38,10 +39,19 @@ Requires: libXfont2 = %{version}-%{release}
 dev components for the libXfont2 package.
 
 
+%package filemap
+Summary: filemap components for the libXfont2 package.
+Group: Default
+
+%description filemap
+filemap components for the libXfont2 package.
+
+
 %package lib
 Summary: lib components for the libXfont2 package.
 Group: Libraries
 Requires: libXfont2-license = %{version}-%{release}
+Requires: libXfont2-filemap = %{version}-%{release}
 
 %description lib
 lib components for the libXfont2 package.
@@ -58,13 +68,16 @@ license components for the libXfont2 package.
 %prep
 %setup -q -n libXfont2-2.0.5
 cd %{_builddir}/libXfont2-2.0.5
+pushd ..
+cp -a libXfont2-2.0.5 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1627928679
+export SOURCE_DATE_EPOCH=1634254591
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -76,19 +89,35 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %configure --disable-static
 make  %{?_smp_mflags}
 
+unset PKG_CONFIG_PATH
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3"
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3"
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3"
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3"
+%configure --disable-static
+make  %{?_smp_mflags}
+popd
 %check
 export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check
+cd ../buildavx2;
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1627928679
+export SOURCE_DATE_EPOCH=1634254591
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libXfont2
 cp %{_builddir}/libXfont2-2.0.5/COPYING %{buildroot}/usr/share/package-licenses/libXfont2/2b61cd7d9b22e98804387e896a3cfa382c1bc4ef
+pushd ../buildavx2/
+%make_install_v3
+popd
 %make_install
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -99,10 +128,15 @@ cp %{_builddir}/libXfont2-2.0.5/COPYING %{buildroot}/usr/share/package-licenses/
 /usr/lib64/libXfont2.so
 /usr/lib64/pkgconfig/xfont2.pc
 
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-libXfont2
+
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libXfont2.so.2
 /usr/lib64/libXfont2.so.2.0.0
+/usr/share/clear/optimized-elf/lib*
 
 %files license
 %defattr(0644,root,root,0755)
