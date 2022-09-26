@@ -6,7 +6,7 @@
 #
 Name     : libXfont2
 Version  : 2.0.6
-Release  : 18
+Release  : 19
 URL      : https://www.x.org/releases/individual/lib/libXfont2-2.0.6.tar.xz
 Source0  : https://www.x.org/releases/individual/lib/libXfont2-2.0.6.tar.xz
 Source1  : https://www.x.org/releases/individual/lib/libXfont2-2.0.6.tar.xz.sig
