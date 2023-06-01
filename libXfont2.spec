@@ -7,7 +7,7 @@
 #
 Name     : libXfont2
 Version  : 2.0.6
-Release  : 21
+Release  : 22
 URL      : https://www.x.org/releases/individual/lib/libXfont2-2.0.6.tar.xz
 Source0  : https://www.x.org/releases/individual/lib/libXfont2-2.0.6.tar.xz
 Source1  : https://www.x.org/releases/individual/lib/libXfont2-2.0.6.tar.xz.sig
@@ -73,7 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683053053
+export SOURCE_DATE_EPOCH=1685632592
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -105,7 +105,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1683053053
+export SOURCE_DATE_EPOCH=1685632592
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libXfont2
 cp %{_builddir}/libXfont2-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libXfont2/2b61cd7d9b22e98804387e896a3cfa382c1bc4ef || :
@@ -120,14 +120,12 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libXfont2.so
 /usr/include/X11/fonts/libxfont2.h
 /usr/lib64/libXfont2.so
 /usr/lib64/pkgconfig/xfont2.pc
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libXfont2.so.2
 /V3/usr/lib64/libXfont2.so.2.0.0
 /usr/lib64/libXfont2.so.2
 /usr/lib64/libXfont2.so.2.0.0
