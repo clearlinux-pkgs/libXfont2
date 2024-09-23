@@ -1,9 +1,9 @@
 Configure miss: X.Org SGML entities >= 1.7
+Configure miss: gcc option to enable large file support
+Configure miss: gcc option to enable large file support
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: gcc options needed to detect all undeclared functions
 Configure miss: if Xtrans should support os-specific local connections
 Configure miss: if Xtrans should support os-specific local connections
-Configure miss: library containing strlcat
-Configure miss: library containing strlcat
 Configure miss: x86_64-generic-linux-gnu-file
 Configure miss: x86_64-generic-linux-gnu-file
